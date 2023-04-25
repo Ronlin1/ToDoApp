@@ -2,7 +2,6 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
-import waitress
 
 
 def main():
@@ -19,6 +18,5 @@ def main():
     execute_from_command_line(sys.argv)
 
 
-if __name__ == "__main__":
-    print("__GROUP 2 APP__is___up___")
-    waitress.serve(app, host='0.0.0.0', port=8080)
+if __name__ == '__main__':
+    main()
