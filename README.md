@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # GROUP TWO TO-DO APP
 ### ⚡ WHAT IS A TODO APP ?
 A to-do app is a digital tool that helps you organize and manage your tasks, projects, and daily responsibilities. It allows you to create and prioritize a list of things you need to do, set reminders, and track your progress. You can also use a to-do app to assign tasks to others, share lists, and collaborate with team members. Overall, a to-do app is a helpful tool for individuals and teams to stay organized and productive.
@@ -72,3 +73,8 @@ The port number might be different if you have specified a different port in the
 
 ### ⚡ MORE INFORMATION
 This is the current information that is due to change about this repo but more information can be got from the Group Leader: **Eddy
+=======
+# ToDoApp
+ToDo Application
+https://todo-app-k1wr.onrender.com
+>>>>>>> a523b5058df8c1e40f9d084c4da4d5357da47439
