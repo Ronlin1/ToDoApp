@@ -10,7 +10,10 @@ from django.contrib.auth import login
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from .models import Task
+from .forms import CustomUserCreationForm
+from django.forms.widgets import DateInput, NumberInput
 
+# from .forms import ReminderForm
 
 class TaskList(LoginRequiredMixin, ListView):
     model = Task
@@ -37,13 +40,27 @@ def home(request):
 
 class TaskCreate(LoginRequiredMixin, CreateView):
     model = Task
-    fields = ['title', 'description', 'complete']
-    # fields = ['title', 'description']
+    # fields = ['title', 'description', 'complete','created', 'skipped','expected_date', 'expected_time' ]
+    fields = ['title', 'description', 'complete','due_date','reminder_time' ]
     success_url = reverse_lazy('task')
+    # exclude = ('created', )
+    template_name = 'todo/task_form.html'
 
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super(TaskCreate, self).form_valid(form)
+    
+    def get_form(self, form_class=None):
+            form = super().get_form(form_class)
+            form.fields['due_date'].widget = DateInput(attrs={'type': 'date'})
+            form.fields['reminder_time'].widget = NumberInput(attrs={'type': 'number', 'min': 0})
+            return form      
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['datepickers'] = True
+        return context
+
 
 class TaskUpdate(LoginRequiredMixin, UpdateView):
     model = Task
@@ -56,7 +73,6 @@ class TaskDelete(LoginRequiredMixin, DeleteView):
     context_object_name = 'task'
     success_url = reverse_lazy('task')
 
-
 class CustomLoginView(LoginView):
     template_name = 'todo/login.html'
     fields = "__all__"
@@ -67,7 +83,7 @@ class CustomLoginView(LoginView):
 
 class RegisterPage(FormView):
     template_name = 'todo/register.html'
-    form_class = UserCreationForm
+    form_class = CustomUserCreationForm
     redirect_authenticated_user = True
     success_url = reverse_lazy('task')
 
@@ -75,9 +91,13 @@ class RegisterPage(FormView):
         user = form.save()
         if user is not None:
             login(self.request, user)
-        return super(RegisterPage, self).form_valid(form)
+        return super().form_valid(form)
+    
+    def form_invalid(self, form):
+        # print(form.errors)
+        return super().form_invalid(form)
 
-    def get(self, *args, **kwargs):
+    def get(self, request, *args, **kwargs):
         if self.request.user.is_authenticated:
             return redirect('task')
-        return super(RegisterPage, self).get(*args, *kwargs)
+        return super().get(request, *args, **kwargs)

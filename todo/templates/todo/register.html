@@ -10,12 +10,25 @@
         {% csrf_token %}
         <label>{{ form.username.label }}</label>
         {{ form.username }}
-    
+
+        <label>{{ form.email.label }}</label>
+        {{ form.email }}
+        
         <label>{{ form.password1.label }}</label>
         {{ form.password1 }}
     
         <label>{{ form.password2.label }}</label>
         {{ form.password2 }}
+        
+        {% if form.errors %}
+            <ul class="errorlist">
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <li>{{ field.label }}: {{ error }}</li>
+                    {% endfor %}
+                {% endfor %}
+            </ul>
+        {% endif %}
         <br><br>
         <input class="button" type="submit" value="Register Now">
     
