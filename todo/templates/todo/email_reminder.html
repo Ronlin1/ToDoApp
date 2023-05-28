@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Task Reminder</title>
+        <style type="text/css">
+            body {
+                font-family: sans-serif;
+                background-color: #f9f9f9;
+            }
+            
+            .container {
+                max-width: 600px;
+                margin: 0 auto;
+                padding: 30px;
+                background-color: #fff;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            }
+            
+            h1 {
+                font-size: 28px;
+                margin-top: 0;
+                color: #333;
+                text-align: center;
+            }
+            
+            p {
+                font-size: 16px;
+                line-height: 1.5;
+                margin-bottom: 1.5em;
+                color: #444;
+            }
+            
+            a {
+                color: #0072c6;
+                text-decoration: none;
+            }
+            
+            a:hover {
+                text-decoration: underline;
+            }
+        </style>
+    </head>
+    <body>
+        <p>Dear {{ user.first_name }},</p>
+
+        <p>This is a reminder that your task "{{ task.title }}" is due in {{ reminder_time }} minutes.</p>
+
+        <p>You can view the details of the task and mark it as complete by clicking the link below:</p>
+
+        <p><a href="{{ task.get_absolute_url }}">{{ task.title }}</a></p>
+
+        <p>Thank you for using our app.</p>
+
+        <p>Best regards,</p>
+        <p>Group Two Team</p>
+    </body>
+</html>

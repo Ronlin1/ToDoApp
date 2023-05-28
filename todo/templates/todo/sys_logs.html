@@ -1,0 +1,16 @@
+{% extends 'todo/main.html' %}
+
+{% block content %}
+<div class="header-bar">
+    <a href="{% url 'task' %}">&#8592; Back</a>
+</div>
+
+<div class="card-body">
+    <h1>System Logs</h1>
+    <ul>
+        {% for log in system_logs %}
+          <li>{{ log.log_time }} - {{ log.log_message }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock content %}
