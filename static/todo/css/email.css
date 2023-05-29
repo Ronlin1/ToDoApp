@@ -1,0 +1,40 @@
+body {
+    font-family: sans-serif;
+    background-color: #f9f9f9;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 30px;
+    background-color: #fff;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+    font-size: 28px;
+    margin-top: 0;
+    color: #333;
+    text-align: center;
+}
+
+p {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 1.5em;
+    color: #444;
+}
+
+a {
+    color: #0072c6;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+p:nth-last-of-type(-n+3) {
+    color: #2b70d0;
+    margin-bottom: 0;
+}

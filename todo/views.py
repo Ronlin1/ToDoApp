@@ -12,19 +12,32 @@ from django.urls import reverse_lazy
 from .models import Task
 from .forms import CustomUserCreationForm
 from django.forms.widgets import DateTimeInput, NumberInput
-from django.contrib.auth.decorators import login_required
 from .models import SystemLog
-from datetime import timedelta
-from django.contrib import messages
-from django.core.mail import send_mail
-from django.template.loader import render_to_string
-from django.contrib.auth.models import User
-from django.conf import settings
-from django.utils import timezone
-from threading import Thread
+
+from django.urls import reverse
+from django.http import HttpResponseRedirect
 
 
-# from .forms import ReminderForm
+# def login_from_email(request, user_id, todo_id):
+#     # Check if user_id and todo_id exist and retrieve the associated user and todo instances
+#     try:
+#         user = User.objects.get(id=user_id)
+#         todo = Todo.objects.get(id=todo_id)
+#     except (User.DoesNotExist, Todo.DoesNotExist):
+#         # User or todo does not exist, handle this case appropriately
+#         return HttpResponse("User or Todo does not exist")
+
+#     # Authenticate the user
+#     user = authenticate(request, username=user.username, password=user.password)
+#     if user is not None:
+#         # Log the user in
+#         login(request, user)
+#         # Redirect the user to the appropriate todo item
+#         return HttpResponseRedirect(reverse('todo-detail', args=[todo_id]))
+#     else:
+#         # Authentication failed, handle this case appropriately
+#         return HttpResponse("Invalid login details")
+
 
 class TaskList(LoginRequiredMixin, ListView):
     model = Task
@@ -59,28 +72,8 @@ class TaskCreate(LoginRequiredMixin, CreateView):
         form.instance.user = self.request.user
         form.instance.email = self.request.user.email
         response = super().form_valid(form)
-
-    #     if form.cleaned_data['reminder_time'] > 0:
-    #         reminder_time = form.instance.due_date - timezone.timedelta(minutes=form.cleaned_data['reminder_time'])
-    #         Thread(target=self.send_reminder_email, args=(form.instance.user.pk, form.instance.pk, reminder_time)).start()
-
-    #     messages.success(self.request, 'Task created successfully.')
         return response
     
-    # def send_reminder_email(self, user_id, task_id, reminder_time):
-    #     user = User.objects.get(pk=user_id)
-    #     task = Task.objects.get(pk=task_id)
-    #     subject = f'Reminder: Task "{task.title}" due soon'
-    #     message = render_to_string('todo/email_reminder.html', {
-    #         'user': user,
-    #         'task': task,
-    #         'reminder_time': reminder_time
-    #     })
-    #     from_email = settings.EMAIL_HOST_USER
-    #     recipient_list = [user.email]
-    #     send_mail(subject, message, from_email, recipient_list, fail_silently=False)
-
-
     def get_form(self, form_class=None):
         form = super().get_form(form_class)
         form.fields['due_date'].widget = DateTimeInput(attrs={'type': 'datetime-local'})
@@ -97,26 +90,10 @@ class TaskUpdate(LoginRequiredMixin, UpdateView):
     fields = ['title', 'description', 'complete',]
     success_url = reverse_lazy('task')
 
-
 class TaskDelete(LoginRequiredMixin, DeleteView):
     model = Task
     context_object_name = 'task'
     success_url = reverse_lazy('task')
-
-
-# class TaskDelete(LoginRequiredMixin, DeleteView):
-#     model = Task
-#     # template_name = 'todo/task_confirm_delete.html'
-#     context_object_name = 'task'
-#     success_url = reverse_lazy('task')
-    
-#     def form_valid(self, form):
-#         if self.request.user != self.get_object().user:
-#             messages.error(self.request, "You don't have permission to delete this task.")
-#             return redirect("task")
-#         messages.success(self.request, "The task was deleted successfully.")
-#         return super().form_valid(form)
-
 
 class CustomLoginView(LoginView):
     template_name = 'todo/login.html'

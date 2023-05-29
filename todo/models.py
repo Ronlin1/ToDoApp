@@ -4,6 +4,7 @@ from datetime import date, time, datetime
 from django.utils import timezone
 from django.contrib.auth import get_user_model
 from django.urls import reverse
+from django.conf import settings
 
 User = get_user_model()
 class Task(models.Model):
@@ -22,13 +23,22 @@ class Task(models.Model):
             self.skipped = True
         super().save(*args, **kwargs)
         
-    def get_absolute_url(self):
-        return reverse('tasks-detail', args=[str(self.id)])
-    
-    # def delete(self, *args, **kwargs):
-    #     expired_days_ago = (timezone.now() - self.created).days >= 7
-    #     if expired_days_ago:
-    #         super().delete(*args, **kwargs)
+    # def get_absolute_url(self):
+    #     return reverse('tasks-detail', args=[str(self.id)])
+    # def get_absolute_url(self, user_id=None):
+    #     url = reverse('tasks-detail', args=[str(self.id)])
+    #     if user_id:
+    #         url += f'?user_id={user_id}'
+    #     return url
+    def get_absolute_url(self, user_id=None):
+        domain_name = settings.DOMAIN_NAME
+        url = reverse('tasks-detail', args=[str(self.id)])
+        url = f"https://{domain_name}{url}"
+
+        if user_id:
+            url += f'?user_id={user_id}'
+
+        return url
 
     def __str__(self):
         return self.title
@@ -44,16 +54,3 @@ class SystemLog(models.Model):
     def __str__(self):
         return f'{self.log_time} - {self.log_message}'
 
-
-# class TaskManager(models.Manager):
-#     def delete_old_tasks(self):
-#         """
-#         Deletes all tasks that are 7 days or older.
-#         """
-#         self.filter(due_date__lte=timezone.now() - timezone.timedelta(days=7)).delete()
-
-
-# from django.contrib.auth.models import AbstractUser
-
-# class User(AbstractUser):
-#     time_zone = models.CharField(max_length=50, default='UTC')

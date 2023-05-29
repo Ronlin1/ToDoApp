@@ -5,6 +5,8 @@ from django.contrib.auth.models import User
 from todo.models import Task
 from django.shortcuts import render
 from django.utils import timezone
+from datetime import timedelta
+from django.core.mail import EmailMessage
 
 
 def send_reminder_email(user_id, task_id, reminder_time):
@@ -18,20 +20,34 @@ def send_reminder_email(user_id, task_id, reminder_time):
     })
     from_email = settings.EMAIL_HOST_USER
     recipient_list = [user.email]
-    send_mail(subject, message, from_email, recipient_list, fail_silently=False)
-    print("-1-1-")
+
+    # Create an instance of `EmailMessage` 
+    email = EmailMessage(subject, message, from_email, recipient_list)
+    email.content_subtype = "html"
+    email.send()
+
+    # Print the HTML message
+    # print(message)
+    print("EMAIL SENT---------")
 
 def auto_send():
-    # print(timezone.now())
     for task in Task.objects.all():
         due_date = timezone.localtime(task.due_date)
         reminder_time = due_date - timezone.timedelta(minutes=task.reminder_time)
-        print(timezone.now(), "TZ")
-        print(reminder_time ,"RT")
+        reminder_time = reminder_time.replace(tzinfo=None) # remove timezone offset
+        current_time = timezone.now() + timedelta(hours=3) # add 3 hours to current time
+        reminder_time_str = reminder_time.strftime('%Y-%m-%d %H:%M:%S') # convert to string without timezone offset
+        # print(current_time.strftime('%Y-%m-%d %H:%M:%S'), "Current Time")
+        # print(reminder_time_str, "Reminder Time")
         try:
-            if timezone.now() == reminder_time:
+            if current_time.strftime('%Y-%m-%d %H:%M:%S') == reminder_time_str:
+                print("SEND AN EMAIL NOW!")
                 # Send the reminder email
                 send_reminder_email(task.user.pk, task.pk, reminder_time)
-        except Exception as e:print(e)
+        except Exception as e:
+            print(e)
+            pass
     
+   
+ 
     
