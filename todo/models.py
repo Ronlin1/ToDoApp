@@ -15,7 +15,7 @@ class Task(models.Model):
     skipped = models.BooleanField(default=False)
     due_date = models.DateTimeField(default=timezone.now)
     reminder_time = models.IntegerField(null=False, blank=False, default=1)
-    email = models.EmailField(max_length=254, null=True, blank=True)
+    email = models.EmailField(max_length=100, blank=False, null=False, default="ronlinapps@gmail.com")
     
     def save(self, *args, **kwargs):
         if not self.complete and self.due_date <= timezone.now():
