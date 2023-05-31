@@ -2,6 +2,8 @@ body{
     background: linear-gradient(90deg, #ff00bf9b 0%, #c6ff6932 43%, #0099ff9d 100%);
     font-family: 'Nunito', sans-serif;
     padding-top: 50px;
+    /* background-image: url(../images/hero-bg.png); */
+    /* background-color: #ffffff; */
 
 }
 .container {

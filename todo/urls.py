@@ -3,6 +3,7 @@ from .views import TaskList, TaskDetail, TaskCreate, TaskUpdate, TaskDelete, Cus
 from django.contrib.auth.views import LogoutView
 from . import views
 
+# Creation of routes
 urlpatterns = [
     path('list', TaskList.as_view(), name="task"),
     path('', views.home, name='home'),

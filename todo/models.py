@@ -7,6 +7,8 @@ from django.urls import reverse
 from django.conf import settings
 
 User = get_user_model()
+
+# Initialise Task Model
 class Task(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, related_name='tasks')
     title = models.CharField(max_length=200, null=True)
@@ -18,18 +20,13 @@ class Task(models.Model):
     reminder_time = models.IntegerField(null=False, blank=False, default=1)
     email = models.EmailField(max_length=100, blank=False, null=False, default="ronlinapps@gmail.com")
     
+    # Save skipped task
     def save(self, *args, **kwargs):
         if not self.complete and self.due_date <= timezone.now():
             self.skipped = True
         super().save(*args, **kwargs)
         
-    # def get_absolute_url(self):
-    #     return reverse('tasks-detail', args=[str(self.id)])
-    # def get_absolute_url(self, user_id=None):
-    #     url = reverse('tasks-detail', args=[str(self.id)])
-    #     if user_id:
-    #         url += f'?user_id={user_id}'
-    #     return url
+    # Building a sharable todo URL
     def get_absolute_url(self, user_id=None):
         domain_name = settings.DOMAIN_NAME
         url = reverse('tasks-detail', args=[str(self.id)])
@@ -47,6 +44,7 @@ class Task(models.Model):
         ordering = ['complete']
 
 class SystemLog(models.Model):
+    # IMPLEMENT THIS LATER AFTER EXAM: System Logs and Activity
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     log_time = models.DateTimeField(auto_now_add=True)
     log_message = models.TextField()

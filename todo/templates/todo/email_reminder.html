@@ -51,20 +51,7 @@
         }
     </style>
     </head>
-    {% comment %} <body>
-        <p>Dear {{ user }},</p>
-
-        <p>This is a reminder that your task "{{ task.title }}" is due in {{ reminder_time }} minutes.</p>
-
-        <p>You can view the details of the task and mark it as complete by clicking the link below:</p>
-
-        <p><a href="{{ task.get_absolute_url }}">{{ task.title }}</a></p>
-
-        <p>Thank you for using our app.</p>
-
-        <p>Best regards,</p>
-        <p>Group Two Team</p>
-    </body> {% endcomment %}
+    
     <body>
         <p>Dear {{ user }},</p>
 
@@ -72,8 +59,8 @@
 
         <p>You can view the details of the task and mark it as complete by clicking the link below:</p>
 
-        <p><a href="{{ get_absolute_url }}{{ user.id }}/">{{ task.title }}</a></p>
-
+        {% comment %} <p><a href="{{ get_absolute_url }}{{ user.id }}/">{{ task.title }}</a></p> {% endcomment %}
+        <p><a href="https://todo-app-k1wr.onrender.com//">{{ task.title }}</a></p>
         <p>Thank you for using our app.</p>
 
         <p>Best regards,</p>
