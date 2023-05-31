@@ -3,9 +3,11 @@
 A to-do app is a digital tool that helps you organize and manage your tasks, projects. It allows you to create and prioritize a list of things you need to do, set reminders, and track your progress. You can also use a to-do app to assign tasks to others, share lists, and collaborate with team members. Overall, a to-do app is a helpful tool for individuals' and teams to stay organized,keep activity track and be productive in the end.
 
 
-### ⚡ PROJECT SUMMARY _ OUR UNDERSTANDING
+### ⚡ PROJECT SUMMARY
 
 Based on the given requirements, the project: to-do application was developed using the Django framework for the back-end and JavaScript, HTML, and CSS for the front-end. The application allows users to create and manage daily or weekly lists of tasks, mark tasks as completed or skipped, and set reminders for specific tasks via email notifications. The application also allowed users to delete tasks and automatically removed tasks older than seven days.
+
+![GROUP 2 HOME PAGE](https://raw.githubusercontent.com/Ronlin1/ToDoApp/main/Homepage.PNG)
 
 In terms of user stories, the project was broken down into several stories including user account creation, task creation and management, task completion and skipping, task reminders, task deletion, and task auto-removal. Each story was further broken down into implementation tasks such as creating database models, building user interfaces, implementing email notifications, and configuring deployment settings.
 
@@ -35,9 +37,9 @@ Server: Render Cloud <br>
 | SSEMAGANDA GEORGE|  22/U/3847/EVE     |   2200703847   |
 
 ### ⚡ GITLAB USERNAMES
-RONALD - https://gitlab.com/Ronlin1
-EDWARD - https://gitlab.com/eddiegoza
-GEORGE - https://gitlab.com/Ssemaganda-George
+- RONALD - https://gitlab.com/Ronlin1 <br>
+- EDWARD - https://gitlab.com/eddiegoza <br>
+- GEORGE - https://gitlab.com/Ssemaganda-George <br>
 
 ### ⚡ PROJECT GITLAB URL
 https://gitlab.com/devsgroup2/to-do-list/
@@ -60,8 +62,7 @@ The following commands and instructions can be used to deploy and run our To-Do 
 - Install project requirements: <br>
 ``` pip install -r requirements.txt ```
 - Migrate the database:<br>
-``` python manage.py makemigrations ```
-<br>
+``` python manage.py makemigrations ```<br>
 ``` python manage.py migrate ```
 - Start the development server:<br>
 ``` python manage.py runserver ```
@@ -76,12 +77,14 @@ ToDo Application
 https://todo-app-k1wr.onrender.com
 
 ### ⚡ User Documentation : How To Use our Todo App
-The user is required to be logged in and authenticated to create tasks in a todo list, including specifying the date and time for each task. The application automatically deletes tasks that are more than 7 days old, ensuring efficient task management. Additionally, the app visually differentiates tasks that have been skipped, marking them with a red crossed line, while completed tasks are marked in green. To assist the user in staying organized, the app includes a scheduler that sends email notifications reminding the user of upcoming tasks that are due.
+The user is required to be logged in and authenticated to create tasks in a todo list, including specifying the date and time for each task. The application automatically deletes tasks that are more than 7 days old, ensuring efficient task management. 
+
+Additionally, the app visually differentiates tasks that have been skipped, marking them with a red crossed line, while completed tasks are marked in green. To assist the user in staying organized, the app includes a scheduler that sends email notifications reminding the user of upcoming tasks that are due.
 
 ### ⚡ App Screenshots
-
+![GROUP 2 TODO PAGE](https://github.com/Ronlin1/ToDoApp/blob/main/ToDoPage.png?raw=true)
 
 ### ⚡ MORE INFORMATION
-This is the current information that is due to change about this repo but more information can be got from the Group Leader: **Eddy
+#### This is the current information that is due to change about this repo but more information can be got from the Group Leader: **Eddy
 =======
 
