@@ -21,12 +21,12 @@ Overall, the project aimed to deliver a user-friendly and functional to-do appli
 
 The To Do App is going to have or use the following technological and functional constraints:
 <br>
-The back-end: Django framework. <br>
-The front-end: JavaScript, HTML, and CSS. <br>
-Minimal UI. <br>
-Database: SQlite3 <br>
-Automation: APScheduler <br>
-Server: Render Cloud <br>
+📌 The back-end: Django framework. <br>
+📌 The front-end: JavaScript, HTML, and CSS. <br>
+📌 Minimal UI. <br>
+📌 Database: SQlite3 <br>
+📌 Automation: APScheduler <br>
+📌 Server: Render Cloud <br>
 
 ### ⚡ GROUP MEMBERS
 
@@ -45,7 +45,7 @@ Server: Render Cloud <br>
 https://gitlab.com/devsgroup2/to-do-list/
 
 ### ⚡ CI/CD & DELIVERABLE TIMELINES
-The following are the deadlines for the different delivereables that will be updated with time:
+The following are the deadlines for the different deliverables that will be updated with time:
 - [x] Deliverable 1: Date Due: 9th March 2023 <br>
 - [x] Deliverable 2: 26th April 2023 <br>
 - [x] Deliverable 3: 31st May 2023 <br>
@@ -59,10 +59,13 @@ The following commands and instructions can be used to deploy and run our To-Do 
 - Create and activate a virtual environment according to your local OS then follow the following steps:<br>
 - Clone the repository:<br>
 ``` git clone <repository_url> ```
+- Change directory:<br>
+``` cd to-do-list ```
 - Install project requirements: <br>
 ``` pip install -r requirements.txt ```
 - Migrate the database:<br>
 ``` python manage.py makemigrations ```<br>
+- Apply Migrations:<br>
 ``` python manage.py migrate ```
 - Start the development server:<br>
 ``` python manage.py runserver ```
